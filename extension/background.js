@@ -334,7 +334,8 @@ async function netAction(params, cfg) {
   )
 
   const rows = perf?.rows || []
-  const cdpOn = Boolean(cfg.cdp) && isAttached(tabId)
+  if (cfg.cdp) await attach(tabId).catch(() => {})
+  const cdpOn = Boolean(cfg.cdp)
   if (!cdpOn) {
     return { cdp: false, total: perf?.total ?? rows.length, apiCount: rows.length, entries: rows }
   }
@@ -381,6 +382,7 @@ async function runCommand(command, cfg) {
     }
     case 'open': {
       const tab = await chrome.tabs.create({ url: params.url, active: true })
+      if (cfg.cdp) await attach(tab.id).catch(() => {})
       return { tabId: tab.id, url: tab.pendingUrl || tab.url, title: tab.title }
     }
     case 'activate': {
@@ -390,6 +392,7 @@ async function runCommand(command, cfg) {
     }
     case 'navigate': {
       const tab = await chrome.tabs.update(params.tabId, { url: params.url })
+      if (cfg.cdp) await attach(tab.id).catch(() => {})
       return { tabId: tab.id, url: params.url }
     }
     case 'close': {
