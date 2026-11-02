@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Chrome Bridge",
+    "description": "Drive your own Chrome through a paired MV3 extension: open tabs, navigate, click, type, capture, and inspect network calls inside the window you are watching."
+  }
+}

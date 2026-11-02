@@ -1,0 +1,9 @@
+- insert:
+    - id: chrome-bridge
+      name: './index.js'
+      config:
+        autoStart: true
+        port: 47311
+        captureDir: ''
+        # 空数组 = 不限制域名。生产环境建议填业务域名,例如:["example.com"]
+        allowedHosts: []

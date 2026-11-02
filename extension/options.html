@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <title>DSH Chrome Bridge</title>
+    <style>
+      :root { color-scheme: light dark; }
+      body { font: 14px/1.6 -apple-system, system-ui, sans-serif; margin: 0; padding: 28px; max-width: 600px; }
+      h1 { font-size: 17px; margin: 0 0 4px; }
+      p.lead { margin: 0 0 20px; opacity: .7; }
+      label.field { display: block; margin: 14px 0 6px; font-weight: 600; }
+      input[type="text"], input[type="number"] {
+        width: 100%; padding: 8px 10px; border: 1px solid #8884; border-radius: 8px; background: transparent;
+        font: inherit; font-family: ui-monospace, Menlo, monospace; box-sizing: border-box;
+      }
+      .row { display: flex; gap: 10px; margin-top: 20px; }
+      button { padding: 8px 16px; border-radius: 8px; border: 1px solid #8884; background: #2563eb; color: #fff;
+               font: inherit; cursor: pointer; }
+      button.secondary { background: transparent; color: inherit; }
+      #status { margin-top: 18px; padding: 10px 12px; border-radius: 8px; background: #8881; white-space: pre-wrap; }
+      .card { margin-top: 26px; padding: 14px 16px; border: 1px solid #8884; border-radius: 10px; }
+      .card h2 { font-size: 14px; margin: 0 0 8px; }
+      .card p { margin: 0 0 10px; opacity: .75; font-size: 13px; }
+      .card label { display: flex; gap: 8px; align-items: flex-start; font-size: 13px; }
+      code { background: #8881; padding: 1px 5px; border-radius: 4px; }
+      .badge { display: inline-block; padding: 1px 7px; border-radius: 999px; background: #7c3aed; color: #fff;
+               font-size: 11px; vertical-align: middle; margin-left: 6px; }
+    </style>
+  </head>
+  <body>
+    <h1>DSH Chrome Bridge <span id="mode" class="badge" hidden>CDP</span></h1>
+    <p class="lead">把这个扩展连到本机 DeepSeek Harness 的桥。所有动作都在这个浏览器里执行,你能直接看到。</p>
+
+    <label class="field" for="port">桥接端口</label>
+    <input id="port" type="number" min="1" max="65535" placeholder="47311" />
+
+    <label class="field" for="token">Token</label>
+    <input id="token" type="text" placeholder="从 DSH 的 chrome-bridge 配置里复制" spellcheck="false" />
+
+    <div class="row">
+      <button id="save">保存</button>
+      <button id="test" class="secondary">测试连接</button>
+    </div>
+
+    <div id="status">尚未测试。</div>
+
+    <div class="card">
+      <h2>CDP 模式(真实输入事件)</h2>
+      <p>
+        默认关闭。关闭时点击/输入是脚本合成事件:快、无提示条,但 Enter 不会触发表单默认提交,
+        拖拽和 Canvas 也点不动,而且抓不到 HTTP method 和请求体。
+        开启后走 <code>chrome.debugger</code> 发送真实鼠标/键盘事件,代价是挂载期间浏览器顶部会出现
+        “正在被调试”提示条。
+      </p>
+      <label>
+        <input id="cdp" type="checkbox" />
+        <span>启用 CDP 模式(切换后需在页面上重新操作一次)</span>
+      </label>
+    </div>
+
+    <p class="lead" style="margin-top:22px">
+      Token 与端口来自 <code>~/.dsh/storages/chrome-bridge/config.json</code>。
+    </p>
+
+    <script src="options.js"></script>
+  </body>
+</html>

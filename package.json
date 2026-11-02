@@ -1,0 +1,57 @@
+{
+  "name": "dsh-plugin-chrome-bridge",
+  "version": "1.0.0",
+  "description": "Drive the user's own Chrome from DeepSeek Harness through a paired MV3 extension. Actions run in the visible browser window: tabs, navigation, clicks, typing, screenshots, structured DOM queries, and network inspection.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Leo9419",
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "cordis",
+    "chrome",
+    "browser-automation",
+    "chrome-extension",
+    "mv3"
+  ],
+  "homepage": "https://github.com/Leo9419/dsh-chrome-bridge#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Leo9419/dsh-chrome-bridge.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Leo9419/dsh-chrome-bridge/issues"
+  },
+  "exports": {
+    ".": "./index.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "main": "./index.js",
+  "files": [
+    "index.js",
+    "lib/",
+    "cordis.patch.yml",
+    "locale/*.json",
+    "icon.svg",
+    "extension/",
+    "README.md",
+    "README.zh.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node --test",
+    "check": "node --check index.js && node --check extension/background.js && node --check extension/lib/cdp.js && node --check extension/options.js",
+    "pack:extension": "node scripts/pack-extension.mjs",
+    "verify": "npm run check && npm test"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  }
+}
