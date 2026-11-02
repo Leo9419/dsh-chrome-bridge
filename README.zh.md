@@ -2,6 +2,10 @@
 
 用 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) 操控**你自己的 Chrome**。和 Claude 的 Chrome 集成同一套架构:动作由浏览器扩展在你眼前的窗口里执行。
 
+![演示](docs/demo.gif)
+
+*搜索、提交、打开结果 —— 全部由 Agent 驱动,在你的浏览器里执行。*
+
 ```text
 Agent 工具 chrome_*
       │
@@ -37,9 +41,10 @@ DSH 插件:本机 HTTP 桥(127.0.0.1,token 鉴权)
 
 ### 1. 把插件装进 DSH
 
-```bash
-dsh plugin install /path/to/dsh-chrome-bridge    # 或用 plugin_manager 工具
-```
+用 harness 的插件管理器(`plugin_manager` → `install_bundle`)安装这个 bundle,来源二选一:
+
+- npm:`dsh-plugin-chrome-bridge`
+- 本地检出:`/绝对/路径/dsh-chrome-bridge`
 
 bundle 会插入一行 `chrome-bridge`,并在 `47311` 起本地桥。端口与访问 token 写在:
 

@@ -2,6 +2,10 @@
 
 Drive **your own Chrome** from [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) — the same architecture Claude's Chrome integration uses: a browser extension performs every action inside the window you are already looking at.
 
+![demo](docs/demo.gif)
+
+*Search, submit, open a result — driven by the agent, executed in the visible browser.*
+
 ```text
 agent tool (chrome_*)
       │
@@ -37,10 +41,10 @@ Nothing runs headless. Every click, keystroke and navigation happens in the brow
 
 ### 1. Install the plugin into DSH
 
-```bash
-# from a checkout of this repo
-dsh plugin install /absolute/path/to/dsh-chrome-bridge   # or use the plugin_manager tool
-```
+Install the bundle with the harness plugin manager (`plugin_manager` → `install_bundle`), pointing at either:
+
+- npm: `dsh-plugin-chrome-bridge`
+- a checkout: `/absolute/path/to/dsh-chrome-bridge`
 
 The bundle inserts one row (`chrome-bridge`) and starts a localhost bridge on port `47311`. The port and the access token are written to:
 
